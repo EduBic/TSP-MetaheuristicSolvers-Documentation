@@ -1,1 +1,31 @@
 \section{Second Assignment}
+
+\subsection{Program}
+	In order to resolve the Asymmetric Travelling Salesman Problem with meta heuristics, I chose to implement the simple Local Search (LC) and the Tabu Search (TS). This choice was done for two reasons: 
+	\begin{itemize}
+		\item ;
+		\item For test my curiosity about this so simple methods for search a good solution in a ridiculous amount of time.
+	\end{itemize}
+
+	From the literature we can see that either LS and mostly TS could be change in every details, starting solution, how to choice the neighbor and so on. For these reason I code the program in a modular way.
+	
+	For an easier testing I write a class SolverExecutor that groups all Solvers and execute sequentially from the starting solution previously set. With this class is easy to modify the Main.cpp file in order to set the environment of test in a few statements.
+	
+	The main parts are the Solvers interface implemented by LocalSearchSolver and TabuSearchSolver classes. 
+	
+	The LocalSearchSolver when creates gives the only option:
+	\begin{itemize}
+		\item the choice of neighbor: Best improvement and First Improvement.
+	\end{itemize}
+	
+	TabuSearchSolver when creates gives the following options:
+	\begin{itemize}
+		\item The size of tabu list;
+		\item The max number of iteration of the algorithm;
+		\item The choice of neighbor: Best Improvement or First Improvement;
+		\item The possibility to enable the Aspiration Criteria, a neighbor in the tabu list is chosen if it has a better value of current best solution.
+	\end{itemize}
+
+
+
+	
