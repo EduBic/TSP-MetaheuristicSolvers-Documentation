@@ -22,9 +22,37 @@
 	\begin{itemize}
 		\item The size of tabu list;
 		\item The max number of iteration of the algorithm;
+		\item The max seconds of execution;
 		\item The choice of neighbor: Best Improvement or First Improvement;
 		\item The possibility to enable the Aspiration Criteria, a neighbor in the tabu list is chosen if it has a better value of current best solution.
 	\end{itemize}
+
+	\subsubsection{When a move is a Tabu}
+		After some test I saw that the 
+
+	
+\subsection{Calibration}
+	For calibration of the Tabu Search algorithm I look only to the tabu list length parameter. Hence I evaluate the test by the result obtained in \textbf{20 seconds} (CPU time). In fact if we increase the size of tabu list we need more time for check if one Move is a tabu.
+	
+	The test ran with 8 different random start solution, the table\ref{tab:TS-calibration} show the results.
+	
+	
+	\begin{table}
+		\centering
+		\begin{tabular} {l l l l}
+			\toprule
+			method & tenure & Obj.Value (avg) & CPU time \\
+			\midrule
+			Tabu Search & & & \\
+			 			& & & \\
+			 			& & & \\
+			\midrule
+			TS Aspiration Criteria & & & \\
+		\end{tabular}
+		\caption{\label{tab:TS-calibration}Risultati calibrazione Tabu Search}
+	\end{table}
+	
+	
 
 
 

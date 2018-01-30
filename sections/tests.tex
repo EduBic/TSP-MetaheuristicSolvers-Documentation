@@ -1,9 +1,47 @@
 \section{Tests and Results}
 
+\subsection{Instances}
+	The instances chosen are taken from the exercises done in laboratory and from a random generator of symmetric matrices\footnote{available here HREF} with board setting of 50. The pattern use for naming the file is:
+	\begin{center}
+		\verb|<group><N>.dat|
+	\end{center}
+	Where \verb|N| is the number of nodes and \verb|<group>| meaning the origin of that instances.
+	
+	The instances chosen are (\verb|.dat| is omitted):
+	\begin{itemize}
+		\item \verb|tsp12|
+		\item \verb|tsp60|
+		\item \verb|rnd60|
+		\item \verb|rnd80|
+		\item \verb|rnd100|
+		\item \verb|rnd100_2|: build with random generator but with Width of board equal to 60;
+	\end{itemize}
+	I prefer to select instance with an equal number of nodes but made from different source in order to see how much the instance form impact on the results of meta heuristic methods.
+	
+	After done this step I took real instances from PCB projects that I will explain in next section \ref{sec:realDomainTests}. 
+
 \subsection{Results Exact Method}
+
+	\begin{center}
+		\begin{tabular}{lrrr}
+			\toprule
+			\textbf{Instance} & \textbf{Obj. Value} & \textbf{User Time (sec)} & \textbf{CPU time (sec)} \\
+			\midrule
+			tsp12 & 66.4 & 0.085119 & 0.250049 \\
+			tsp60 & 629.8 & 11.2403 & 36.201 \\
+			
+			rnd60 & 311.97 & 8.02182 & 28.0022 \\
+			rnd80 & 348.11 & 17.7653 & 56.9268 \\
+			rnd100 & 370.09 & 30.2473 & 86.565 \\
+			rnd10\_2 & 457.54 & 57.1775 & 174.328 \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	
 
 \subsection{Results Local Search}
 
 \subsection{Results Tabu Search}
+
 
 \subsection{Comparisons of results}
