@@ -1,11 +1,11 @@
 \section{Tests and Results}
 
 \subsection{Instances}
-	The instances chosen are taken from the exercises done in laboratory and from a random generator of symmetric matrices\footnote{available here HREF} with board setting of 50. The pattern use for naming the file is:
+	The instances chosen are taken from the exercises done in laboratory and from a random generator of symmetric matrices\footnote{Available here \href{https://github.com/Gheeroppa/TSP_CostMatrixGenerator}{github/TSP-CostMatrixGenerator}} with board size of 50x50. The pattern use for naming the file is:
 	\begin{center}
 		\verb|<group><N>.dat|
 	\end{center}
-	Where \verb|N| is the number of nodes and \verb|<group>| meaning the origin of that instances.
+	Where \verb|N| is the number of nodes and \verb|group| meaning the origin of that instances.
 	
 	The instances chosen are (\verb|.dat| is omitted):
 	\begin{itemize}
@@ -14,7 +14,7 @@
 		\item \verb|rnd60|
 		\item \verb|rnd80|
 		\item \verb|rnd100|
-		\item \verb|rnd100_2|: build with random generator but with Width of board equal to 60;
+		\item \verb|rnd100_2|: build with random generator but with board size 60x60;
 	\end{itemize}
 	I prefer to select instance with an equal number of nodes but made from different source in order to see how much the instance form impact on the results of meta heuristic methods.
 	
@@ -27,19 +27,81 @@
 			\toprule
 			\textbf{Instance} & \textbf{Obj. Value} & \textbf{User Time (sec)} & \textbf{CPU time (sec)} \\
 			\midrule
-			tsp12 & 66.4 & 0.085119 & 0.250049 \\
-			tsp60 & 629.8 & 11.2403 & 36.201 \\
+			\verb|tsp12| & 66.40 & 0.085 & 0.250 \\
+			\verb|tsp60| & 629.80 & 11.240 & 36.201 \\
 			
-			rnd60 & 311.97 & 8.02182 & 28.0022 \\
-			rnd80 & 348.11 & 17.7653 & 56.9268 \\
-			rnd100 & 370.09 & 30.2473 & 86.565 \\
-			rnd10\_2 & 457.54 & 57.1775 & 174.328 \\
+			\verb|rnd60| & 311.97 & 8.022 & 28.002 \\
+			\verb|rnd80| & 348.11 & 17.765 & 56.927 \\
+			\verb|rnd100| & 370.09 & 30.247 & 86.565 \\
+			\verb|rnd100_2| & 457.54 & 57.178 & 174.328 \\
 			\bottomrule
 		\end{tabular}
 	\end{center}
 	
 
 \subsection{Results Local Search}
+	The Local Search is tremendously fast but at a cost of found the optimal solution only in some instance and in average it performs poorly in comparison with other methods. In this test the User time is ignore as it is equal to CPU time, no parallel computation was implemented into meta heuristics algorithm.
+
+	It's interesting to note the average result of Local Search. I run the LS Best Improvement (BI) and LS First Improvement (FI) with 8 random initial solution for each instance. The average results show that FI is almost the better choice at a cost of a bit more time, that is the time needed to explore more solutions.
+
+	\begin{table}
+		\centering
+		\begin{tabular}{llrr}
+			\toprule
+			\textbf{Instance} & \textbf{Neighbor Choice} & \textbf{Avg. Obj. Value} & \textbf{CPU time (s)} \\
+			\midrule
+			\verb|tsp12| 	& Best Improvement & 66.850 & 4.125e-05 \\
+							& First Improvement & 67.325 & 7.3875e-05 \\
+			\midrule
+			\verb|tsp60| 	& Best Improvement & 666.650 & 0.00071163 \\
+							& First Improvement & 657.362 & 0.00101625 \\
+			\midrule
+			\verb|rnd60| 	& Best Improvement & 332.826 & 0.00073738 \\
+							& First Improvement & 329.934 & 0.00096238 \\
+			\midrule
+			\verb|rnd80| 	& Best Improvement & 374.400 & 0.00129013 \\
+							& First Improvement & 371.325 & 0.00198488 \\
+			\midrule
+			\verb|rnd100| 	& Best Improvement & 406.499 & 0.00266875 \\
+					      	& First Improvement & 391.406 & 0.00358875 \\
+			\midrule
+			\verb|rnd100_2| & Best Improvement & 495.690 & 0.00230150 \\
+							& First Improvement & 492.135 & 0.00302388 \\
+			\bottomrule
+		\end{tabular}
+		\caption{\label{tab:AvgResultLS}}
+	\end{table}
+	
+	The \textbf{best strategy} for use Local Search is to start from a lot of different initial solution, in the table\ref{tab:LS-BestStrategyResult} I summarized the results of this strategy, every local search is started with eight different random solution and the \textbf{best value} found is selected. The \textbf{CPU time} corresponds to the sum of the time of the all tabu search ran for each instance.
+	
+	\begin{table}
+		\centering
+		\begin{tabular}{llrrr}
+			\toprule
+			\textbf{Instance} & \textbf{Features} & \textbf{Best Value} & \textbf{CPU time (s)} & \textbf{Ratio} \\
+			\midrule
+			\verb|tsp12| & Best Improv. & 66.4 & 0.000415 & \\
+							& First Improv. & 66.4 & 0.000610 & \\
+			\midrule
+			\verb|tsp60| 	& Best Improv. & 634.6 & 0.009326 & \\
+							& First Improv. & 638.6 & 0.009972 & \\
+			\midrule
+			\verb|rnd60| 	& Best Improv. & 319.35 & 0.009223 & \\
+							& First Improv. & 314.53 & 0.009503 & \\
+			\midrule
+			\verb|rnd80| 	& Best Improv. & 351.69 & 0.012120 & \\
+							& First Improv. & 351.05 & 0.018155 & \\
+			\midrule
+			\verb|rnd100| 	& Best Improv. & 387.45 & 0.028099 & \\
+							& First Improv. & 372.25 & 0.033198 & \\
+			\midrule
+			\verb|rnd100_2| & Best Improv. & 476.34 & 0.023825 & \\
+							& First Improv. & 483.14 & 0.027648 & \\
+			\bottomrule
+		\end{tabular}
+		\caption{\label{tab:LS-BestStrategyResult} Results of Local Search with Best Improvement and First Improvement, the result selected are only the best found from eight random initial solution}
+	\end{table}
+	
 
 \subsection{Results Tabu Search}
 

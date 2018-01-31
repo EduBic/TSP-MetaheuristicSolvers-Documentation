@@ -1,14 +1,22 @@
 \section{Real Domain tests}
 \label{sec:realDomainTests}
-
-	In order to have a better idea of the quality of the methods previously show I test them with real instance. These instances are taken from the gerber files avaiable from the following online archive:
+	In order to have a better idea of the quality of the methods previously show I tested them with real instance. These instances are taken from the gerber files avaible from the following online archive:
 	\begin{itemize}
-		\item https://www.maximintegrated.com/en/design/tools/cad-layout/gerber/ ;
-		\item https://www.microchip.com/doclisting/TechDoc.aspx?type=Gerber ;
+		\item \href{https://www.maximintegrated.com/en/design/tools/cad-layout/gerber/}{https://www.maximintegrated.com/en/design/tools/cad-layout/gerber/};
+		\item \href{https://www.microchip.com/doclisting/TechDoc.aspx?type=Gerber}{https://www.microchip.com/doclisting/TechDoc.aspx?type=Gerber} ;
 	\end{itemize}
 
 	I explored a dozens of project and select the drill gerber files and I built from these files\footnote{This could be done thank to the parser developed by my colleagues Sebastiano Valle and Mirko Bez} the \verb|.dat| summarized into table REFERENCE:
 	
-	TABLE WITH THE REAL INSTANCE
+	\begin{itemize}
+		\item \verb|SC_545|
+		\item \verb|MAX_682|
+		\item \verb|DS_1120|
+		\item \verb|MAX-KIT_1127|
+	\end{itemize}
 	
 	\subsection{Results exact method}
+		The instances are too huge and the power of computation is too low in order to test the exact method implemented with CPLEX in an amount of time for this project purpose. Neither with a timeout the CPLEX API can give me a intermediate solution in a reasonable amount of time.
+		
+		
+	

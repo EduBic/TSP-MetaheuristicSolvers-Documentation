@@ -1,5 +1,12 @@
 \section{First Assignment}
 
-
-\subsection{Program}
+	\subsection{Program}
+		In order to resolve the Asymmetric Travelling Salesman Problem with the support of CPLEX API I built three files:
+		\begin{itemize}
+			\item \verb|main|: the file where all other files are linked and combine in order to solve the problem and use CPLEX API;
+			\item \verb|dataReader|: in this file the data is read from a file \verb|.dat| given in input at the start of the program;
+			\item \verb|ilpSolver|: this file has the responsibility of initialize the environment of CPLEX API with the \verb|setUp| function, in it all the variables and constraints of the mathematical model are initialize. Instead with the \verb|solve| function the program run the CPLEX method for solving a Mixed Integer Programming Problem.
+		\end{itemize}
+	
+		\paragraph{Data Structure} In order to make more readable and easy the generation of constraints I have preferred to implement the costs matrix with an array of two dimensions (also called \verb|map| in class) instead of a single linear vector.
 

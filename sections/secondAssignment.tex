@@ -1,55 +1,75 @@
 \section{Second Assignment}
 
 \subsection{Program}
-	In order to resolve the Asymmetric Travelling Salesman Problem with meta heuristics, I chose to implement the simple Local Search (LC) and the Tabu Search (TS). This choice was done for two reasons: 
+	In order to resolve the ATSP with meta heuristics, I chose to implement the simple \textbf{Local Search} (LC) and the \textbf{Tabu Search} (TS). This choice was done for two reasons: 
 	\begin{itemize}
-		\item ;
-		\item For test my curiosity about this so simple methods for search a good solution in a ridiculous amount of time.
+		\item The incumbent deadline;
+		\item My curiosity about this so simple methods for search a pretty good solution in a ridiculous amount of time.
 	\end{itemize}
 
 	From the literature we can see that either LS and mostly TS could be change in every details, starting solution, how to choice the neighbor and so on. For these reason I code the program in a modular way.
 	
-	For an easier testing I write a class SolverExecutor that groups all Solvers and execute sequentially from the starting solution previously set. With this class is easy to modify the Main.cpp file in order to set the environment of test in a few statements.
+	\paragraph{SolverExecutor} For an easier testing I write a class \verb|SolverExecutor| in which we can add \verb|Solver|s with \verb|addSolver()| and execute sequentially with \verb|execute()| from the starting solution previously set with \verb|initRandomSolution()|. With this class is easy to modify the \verb|Main.cpp| file in order to set the environment of test in a pretty readable way and in a few statements.
 	
-	The main parts are the Solvers interface implemented by LocalSearchSolver and TabuSearchSolver classes. 
+	\paragraph{Solver} The other main parts of program are the \verb|Solver|s interface implemented by \verb|LocalSearchSolver| and \verb|TabuSearchSolver| classes. This permits to the developer to use solvers with different features into the \verb|SolverExecutor| class.
 	
-	The LocalSearchSolver when creates gives the only option:
+	\paragraph{LocalSearchSolver} can be built with the option:
 	\begin{itemize}
-		\item the choice of neighbor: Best improvement and First Improvement.
+		\item Choice of neighbor: Best improvement and First Improvement.
 	\end{itemize}
 	
-	TabuSearchSolver when creates gives the following options:
+	\paragraph{TabuSearchSolver} can be built the following options:
 	\begin{itemize}
-		\item The size of tabu list;
-		\item The max number of iteration of the algorithm;
-		\item The max seconds of execution;
-		\item The choice of neighbor: Best Improvement or First Improvement;
-		\item The possibility to enable the Aspiration Criteria, a neighbor in the tabu list is chosen if it has a better value of current best solution.
+		\item Size of tabu list;
+		\item Maximum number of iteration of the algorithm;
+		\item Maximum seconds of execution;
+		\item Choice of neighbor: Best Improvement or First Improvement;
+		\item Aspiration Criteria, if a neighbor has better value of current best solution it is chosen either if it is a tabu.
 	\end{itemize}
 
 	\subsubsection{When a move is a Tabu}
-		After some test I saw that the 
-
+		Initially I discard a move if it is equal to one into the tabu list.
+		I've tried to add also the condition that if a move is a \textit{specular} move that is into the tabu list it was discarded. A move is \textit{specular} to another one if its \verb|from| is equal to its \verb|to| index and its \verb|to| is equal to its \verb|from| index.
+		
+		After some tests I saw that discard a specular move is not a convenient choice. It reduces the best value obtained from Tabu Search solver with a small tenure. For this I decide to not use that condition during the test.
+		
+	\subsubsection{Extensions of methods}
+		I decide to not extend the Local Search for keep his simplicity as the main feature. For the Tabu search instead I implement the Aspiration Criteria, I don't implement any functionality for intensification and diversification because I think that in order to diversify we can simply start another Tabu Search from a different init random solution and in order to intesify we can reduce the size of the tabu list.
 	
 \subsection{Calibration}
-	For calibration of the Tabu Search algorithm I look only to the tabu list length parameter. Hence I evaluate the test by the result obtained in \textbf{20 seconds} (CPU time). In fact if we increase the size of tabu list we need more time for check if one Move is a tabu.
+	For calibration of the Tabu Search algorithm I look only to the tabu list length parameter. Hence I evaluate the test by the result obtained in \textbf{30 seconds} (CPU time), and from now on every test will be done with 30 seconds timeout. In fact if we increase the size of tabu list we need more time for check if one Move is a tabu.
 	
-	The test ran with 8 different random start solution, the table\ref{tab:TS-calibration} show the results.
-	
+	The test ran with 8 different random start solution for the instance \verb|rnd100.dat|. From the table\ref{tab:TS-calibration} we can see that the Aspiration Criteria (AC) increase the value of the best solution found and that a tenure of \textbf{180} is the best choice.
 	
 	\begin{table}
 		\centering
-		\begin{tabular} {l l l l}
+		\begin{tabular} {l l r}
 			\toprule
-			method & tenure & Obj.Value (avg) & CPU time \\
+			Tenure & Features & Avg. Value \\
 			\midrule
-			Tabu Search & & & \\
-			 			& & & \\
-			 			& & & \\
+			 80 & -  & 381.148  \\
+			 80 & AC & 381.291 \\
 			\midrule
-			TS Aspiration Criteria & & & \\
+			 100 & - & 377.131 \\
+			 100 & AC & 376.455 \\
+			\midrule
+			 120 & - & 373.831 \\
+			 120 & AC & 374.791 \\
+			\midrule
+			 140 & - & 376.768 \\
+			 140 & AC &371.299 \\
+			\midrule
+			 160 & - & 373.419 \\
+			 160 & AC & 371.108 \\
+			\midrule
+			 180 & - & 371.668 \\
+			 180 & AC & 370.189 \\
+			\midrule
+			 200 & - & 372.133 \\
+			 200 & AC & 370.313  \\
+			\bottomrule
 		\end{tabular}
-		\caption{\label{tab:TS-calibration}Risultati calibrazione Tabu Search}
+		\caption{\label{tab:TS-calibration}Risultati calibrazione Tabu Search con Best Improvement and without or with Aspiration Criteria AC}
 	\end{table}
 	
 	
