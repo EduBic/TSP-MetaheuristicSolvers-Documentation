@@ -1,4 +1,39 @@
 \appendix
 \section{Instructions for run programs}
 
-
+	\subsection{Exact Method}
+		In order to use the exact method program the only things to do is call the following command:
+		\begin{center}
+			\verb|./main "<path_filename>.dat"|
+		\end{center}	
+		Where \verb|<path_filename>| is the path of the instance file. I put all of them into \verb|data| folder for convenience.
+	
+	\subsection{Meta Heuristic}
+		In order to use all the features and property of the solvers developed the program should be run with the following commands:
+		
+		\begin{itemize}
+			\item path of instance \verb|.dat| (with quotation marks), example:
+			\begin{center}
+				\verb|./main "<path_filename>.dat"|
+			\end{center}
+			\item Solvers:
+			\begin{enumerate}
+				\item \verb|--ls| or \verb|-l|: Local Search;
+				\item \verb|--ts| or \verb|-t|: Tabu Search;
+			\end{enumerate}
+			\item Solvers features:
+			\begin{enumerate}
+				\item \verb|--bi| or \verb|--fi|: Best Improvement or First Improvement (\textit{default} is BI);
+				\item \verb|--ac|: Aspiration Criteria (only for TS);
+				\item \verb|--maxIter|: Max iteration (\textit{default} is 1000, only for TS);
+				\item \verb|--tenure|: Tenure of Tabu List (\textit{default} is 50, only for TS);
+				\item \verb|--secs|: Max seconds (\textit{default} is 30, only for TS);
+			\end{enumerate}
+		\end{itemize}
+	
+		\paragraph{Example} In order to start or instance \verb|tsp60.dat| a Tabu Search with Best Improvement, Aspiration Criteria, tenure of 20 and max iterations of 10000:
+		\begin{center}
+			\begin{verbatim}
+				./main "data/tsp60.dat" -t --ac --maxiter 10000 --tenure 20
+			\end{verbatim}
+		\end{center}
