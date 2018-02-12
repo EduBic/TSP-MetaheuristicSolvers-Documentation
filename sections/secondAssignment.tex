@@ -22,122 +22,13 @@
 	\end{itemize}
 
 	\subsubsection{When a move is a Tabu}
-		Initially I discard a move if it is equal to one into the tabu list.
-		I've tried to add also the condition that if a move is a \textit{specular} move into the tabu list that move is discarded. A move is \textit{specular} to another one if its \verb|from| is equal to its \verb|to| index and its \verb|to| is equal to its \verb|from| index.
+		I discard a move if it is equal to one into the tabu list, that is all moves into a tabu of length \verb|n| can not be used in the next \verb|n| iterations.
 		
-		After some tests I saw that discard a specular move is not a convenient choice. It reduces the best value obtained from Tabu Search solver with a small tenure. For this I decide to not use that condition during the test phase.
+		\paragraph{Aspiration Criteria} With the aspiration criteria (AC) a tabu move can be selected. This case happens only when the tabu move makes a new solution that have a value greater than the actual best value found during the search.
+		
 		
 	\subsubsection{Extensions of methods}
 		I decide to not extend the Local Search for keep its simplicity as the main feature. For the Tabu search instead I implemented the Aspiration Criteria, I didn't implement any other functionality for intensification and diversification because I think that in order to diversify we can simply start another Tabu Search from a different initial random solution.
-	
-\subsection{Calibration}
-	For calibration of the Tabu Search algorithm I look only to the tabu list length parameter. Hence I evaluate the test by the result obtained in \textbf{30 seconds} (CPU time), and from now on every test will be done with 30 seconds timeout. In fact if we increase the size of tabu list we need more time for check if one Move is a tabu.
-	
-	The test ran with 8 different random start solution for the instance \verb|rnd100.dat|. From the table\ref{tab:TS-calibration} we can see that the Aspiration Criteria (AC) increase the value of the best solution found and that a tenure of \textbf{180} is the best choice.
-	
-	In the tables I highlighted the rows that contain the best average value for TS without and with the AC.
-	
-	\begin{table}
-		\centering
-		\begin{tabular} {l l r}
-			\toprule
-			\textbf{Tenure} & \textbf{Features} & \textbf{Avg. Value} \\
-			\midrule
-			 80 & -  & 381.148  \\
-			 80 & AC & 381.291 \\
-			\midrule
-			 100 & - & 377.131 \\
-			 100 & AC & 376.455 \\
-			\midrule
-			 120 & - & 373.831 \\
-			 120 & AC & 374.791 \\
-			\midrule
-			 140 & - & 376.768 \\
-			 140 & AC &371.299 \\
-			\midrule
-			 160 & - & 373.419 \\
-			 160 & AC & 371.108 \\
-			\midrule
-			\rowcolor{LightGray}
-			 180 & - & 371.668 \\
-			 \rowcolor{LightGray}
-			 180 & AC & 370.189 \\
-			\midrule
-			 200 & - & 372.133 \\
-			 200 & AC & 370.313  \\
-			\bottomrule
-		\end{tabular}
-		\caption{\label{tab:TS-calibration100}Calibration results TS BI without or with AC on instance rnd100}
-	\end{table}
-
-	\begin{table}
-		\centering
-		\begin{tabular} {l l r}
-			\toprule
-			\textbf{Tenure} & \textbf{Features} & \textbf{Avg. Value} \\
-			\midrule
-			\rowcolor{LightGray}
-			80 & -  & 629.8  \\
-			\rowcolor{LightGray}
-			80 & AC & 629.8 \\
-			\midrule
-			100 & - & 630.2 \\
-			\rowcolor{LightGray}
-			100 & AC & 629.8 \\
-			\midrule
-			120 & - & 630.5 \\
-			\rowcolor{LightGray}
-			120 & AC & 629.8 \\
-			\midrule
-			140 & - & 631.9 \\
-			140 & AC & 629.9 \\
-			\midrule
-			160 & - & 632.2 \\
-			160 & AC & 630.1 \\
-			\midrule
-			180 & - & 631.7 \\
-			180 & AC & 630.7 \\
-			\midrule
-			200 & - & 634.0 \\
-			200 & AC & 630.1  \\
-			\bottomrule
-		\end{tabular}
-		\caption{\label{tab:TS-calibration60}Calibration results of TS BI without and with AC on instance tsp60}
-	\end{table}
-	
-	\begin{table}
-		\centering
-		\begin{tabular} {l l r}
-			\toprule
-			\textbf{Tenure} & \textbf{Features} & \textbf{Avg. Value} \\
-			\midrule
-			80 & -  & 350.98  \\
-			80 & AC & 349.94 \\
-			\midrule
-			100 & - & 349.34 \\
-			\rowcolor{LightGray}
-			100 & AC & 348.11 \\
-			\midrule
-			\rowcolor{LightGray}
-			120 & - & 348.42 \\
-			120 & AC & 348.12 \\
-			\midrule
-			140 & - & 348.77 \\
-			140 & AC & 348.14 \\
-			\midrule
-			160 & - & 349.32 \\
-			\rowcolor{LightGray}
-			160 & AC & 348.11 \\
-			\midrule
-			180 & - & 349.36 \\
-			180 & AC & 348.23 \\
-			\midrule
-			200 & - & 350.13 \\
-			200 & AC & 348.19  \\
-			\bottomrule
-		\end{tabular}
-		\caption{\label{tab:TS-calibration80}Calibration results of TS BI without and with AC on instance rnd80}
-	\end{table}
 	
 
 

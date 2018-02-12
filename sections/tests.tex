@@ -1,111 +1,49 @@
 \section{Tests and Results}
 
-\subsection{Instances}
-	The instances chosen are taken from the exercises done in laboratory, from a Random Generator\footnote{An update version of the matrix generation of my colleague Federico Ghirardelli.} of symmetric matrices with board size of 50x50 and by a Random Area Generator. 
-	
-	
-	\paragraph{Random Area Generator} This generator builds a symmetric matrix that try to represent a real PCB instance. In fact a real PCB instance contains some patterns. I individualized two of this patterns: square frame of points and order lines of points. Furthermore there are some random points that have a linear disposition in a random position, it can also be inside an area. 
-	
-	The generator builds an instance with:
-	\begin{itemize}
-		\item 3 square frame that have the following characteristics:
-			\begin{itemize}
-				\item random width and height;
-				\item random position in a 50x50 board;
-				\item not overlap with others areas;
-				\item a random number of points:
-				\begin{equation*}
-					\frac{P_{tot}}{20} \leq P_{area} \leq \frac{P_{tot}}{5}  
-				\end{equation*}
-				\item the points inside form a square shape and have equal distance;
-			\end{itemize}
-		\item 4 lines that have the following characteristics:
-			\begin{itemize}
-				\item $Height = P_{tot} / 20$;
-				\item random position in a 50x50 board;
-				\item a random number of points: $3 \leq P_{line} \leq 8$;
-				\item constant distance between points.
-			\end{itemize}
-	\end{itemize}
-
-	The figures~\ref{fig:fakeBoards} show the \verb|fb60| instance and the \verb|fb100| instance used.
-	
-\newpage
-	\paragraph{Instances files}
-	The pattern use for naming the file is:
-	\begin{center}
-		\verb|<group><N>.dat|
-	\end{center}
-	Where \verb|N| is the number of nodes and \verb|group| meaning the origin of that instances.
-	
-	The instances chosen are (\verb|.dat| is omitted):
-	\begin{itemize}
-		\item \verb|tsp12|
-		\item \verb|tsp60|
-		\item \verb|rnd60|
-		\item \verb|fb60|
-		\item \verb|rnd80|
-		\item \verb|fb80|
-		\item \verb|rnd100|
-		\item \verb|rnd100_2|: build with random generator but with board size 60x60;
-		\item \verb|fb100|
-	\end{itemize}
-	I prefer to select instance with an equal number of nodes but made from different source in order to see how much the instance form impact on the results of meta heuristic methods.
-	
-	After done this step I took real instances from PCB projects that I will explain in next section \ref{sec:realDomainTests}. 
-
-	\begin{figure}[hb]
-		\centering
-		\includegraphics[width=0.44\textwidth]{img/fb60}%
-		\qquad\qquad
-		\includegraphics[width=0.44\textwidth]{img/fb100}
-		\caption{Random fake PCB with 60 and 100 nodes}
-		\label{fig:fakeBoards}
-	\end{figure}
-
-\newpage
 \subsection{Results Exact Method}
+	The result of Exact method in table\ref{tab:ExactMethodResults} comes from the execution of eight time the program in order to have a better estimate for the time in seconds.
+
 	\begin{table}[h]
 		\centering
 		\begin{tabular}{lrrr}
 			\toprule
-			\textbf{Instance} & \textbf{Obj. Value} & \textbf{User Time (sec)} & \textbf{CPU time (sec)} \\
+			\textbf{Instance} & \textbf{Obj. Value} & \textbf{User Time (s)} & \textbf{Avg. CPU time (s)} \\
 			\midrule
-			\verb|tsp12| & 66.40 & 0.085 & 0.250 \\
-			\verb|tsp60| & 629.80 & 11.240 & 36.201 \\
-			\verb|rnd60| & 311.97 & 8.022 & 28.002 \\
-			\verb|fb60|	& 240.47 & 24.498 & 64.486 \\
-			\verb|rnd80| & 348.11 & 17.765 & 56.927 \\
-			\verb|fb80| & 219.37 & 95.216 & 256.200 \\
-			\verb|rnd100| & 370.09 & 30.247 & 86.565 \\
-			\verb|rnd100_2| & 457.54 & 57.178 & 174.328 \\
-			\verb|fb100| & 276.55 & 106.757 & 277.525 \\
+			\verb|tsp12| & 66.40 & 0.085 & 0.240 \\
+			\verb|tsp60| & 629.80 & 11.240 & 36.129 \\
+			\verb|rnd60| & 311.97 & 8.022 & 27.833 \\
+			\verb|fb60|	& 240.47 & 24.498 & 61.198 \\
+			\verb|rnd80| & 348.11 & 17.765 & 54.858 \\
+			\verb|fb80| & 219.37 & 95.216 & 261.729 \\
+			\verb|rnd100| & 370.09 & 30.247 & 85.942 \\
+			\verb|rnd100_2| & 457.54 & 57.178 & 174.448 \\
+			\verb|fb100| & 276.55 & 106.757 & 286.079 \\
 			\bottomrule
 		\end{tabular}
 		\caption{\label{tab:ExactMethodResults} Results Exact method}
 	\end{table}
 
-	There isn't much to say about the exact method results. From the results (table~\ref{tab:ExactMethodResults}) we can see as expected that there is a trend where the increase of the number of nodes increase exponentially the CPU time (figure~\ref{fig:em-time}). This is not always case, in fact the time depends a lot by the instance. The case of \verb|tsp60|, \verb|rnd60| and \verb|rnd100|, 
-	\verb|rnd100_2| show this.
+	There isn't much to say about the exact method results. From the results (table~\ref{tab:ExactMethodResults}) we can see as expected that there is a trend where the increase of the number of nodes increase exponentially the CPU time (figure~\ref{fig:em-results-time}). This is not always the case, in fact the time depends a lot by the instance and the type of the instance, \verb|fb| require always more time than the other instances. The CPU time of \verb|rnd100|, \verb|rnd100_2| and \verb|fb100| show this (look at table \ref{tab:ExactMethodResults}).
+
 	
 	\begin{figure} [hb]
 		\centering
-		\includegraphics[width=\linewidth]{img/EM-results}
-		\caption{Exact Method time for each instance}
-		\label{fig:em-time}
+		\includegraphics[width=\linewidth]{img/EM-results-time}
+		\caption{Exact Method average CPU time for each instance}
+		\label{fig:em-results-time}
 	\end{figure}
 	
 	
 	
 \newpage
 \subsection{Results Local Search}
-	The Local Search is tremendously fast but at a cost of found the optimal solution only in some instance and in average it performs poorly in comparison with other methods. In this test the User time is ignore as it is equal to CPU time, no parallel computation was implemented into meta heuristics algorithm.
+	The Local Search is tremendously fast but at a cost of found the optimal solution only in some instance and in average it performs poorly in comparison with other methods. In this test the User time is ignore as it is equal to CPU time, no parallel computation was implemented into meta heuristics algorithms.
 
 	It's interesting to note the average result of Local Search. I run the LS Best Improvement (BI) and LS First Improvement (FI) with 8 random initial solution for each instance. The average results show that FI is almost always the better choice at a cost of a bit more time, that is the time needed to explore more solutions.
 	
 	The \textbf{best strategy} for use Local Search is to start from a lot of different initial solution, in the table~\ref{tab:LS-BestStrategyResult} I summarized the results of this strategy, every local search is started with eight different random solution and the \textbf{best value} found is selected. The \textbf{CPU time} corresponds to the sum of the time of all tabu searches ran for each instance.
 	
-	\vspace{10pt}
+	\vspace{2cm}
 	
 	\begin{figure}[hb]
 		\centering
@@ -191,8 +129,159 @@
 	
 \newpage
 \subsection{Results Tabu Search}
+	
+	\subsubsection{Calibration}
+	\label{subsec:calibration}
+	For calibration of the Tabu Search algorithm I look only to the tabu list length parameter. Hence I evaluate the test by the result obtained in \textbf{30 seconds} (CPU time),  every calibration test was be done with 30 seconds time-out. Note that if we increase the size of tabu list we need more time for check if one Move is a tabu.
+	
+	I tested the following instances (\verb|.dat|):
+	\begin{itemize}
+		\item \verb|tsp60|
+		\item \verb|rnd80|
+		\item \verb|fb80|
+		\item \verb|rnd100|
+	\end{itemize}
+	
+	The results of calibration phase are summarized in the charts \ref{fig:ts-calibration-rnd80} and \ref{fig:ts-calibration-rnd100}. In the Y axe we have the average of Objective value, in the X axe we have the tabu length.
+	
+	From these charts we can see that:
+	\begin{itemize}
+		\item With a large tabu length the aspiration criteria reduce the average obj. values;
+		\item Different instances produce different result with the same tabu length;
+		\item Long tabu length is better for instances with more nodes, this is the case for \verb|fb80| and \verb|rnd100|. For \verb|rnd80| instead we have better result only if there are aspiration criteria enabled;
+		\item Long tabu length makes the average result worse in small instance: \verb|tsp60|;
+		\item There are only little differences between Best Improvement and First Improvement. 
+	\end{itemize}
+	
+	From these consideration I chose to test tabu search with three type of length:
+	\begin{itemize}
+		\item Small: 100;
+		\item Medium: 180 (the best choice from calibration result);
+		\item Large: 240;
+	\end{itemize}
+	Since Aspiration Criteria sometimes improve the solutions \ref{fig:ts-calibration-rnd80} and there are not marked differences between Best improvement and First Improvement I will test only tabu search with \textbf{Best Improvement} and \text{Apiration Criteria}
+	
+	
+	\begin{figure}[p]
+		\centering
+		\includegraphics[width=\linewidth]{img/TS-calibration-tsp60}
+		%\caption{}
+		%\label{fig:ts-calibration-tsp60}
+	%\end{figure}
+	
+	\vspace{2cm}
+	
+	%\begin{figure}
+		%\centering
+		\includegraphics[width=\linewidth]{img/TS-calibration-rnd80}
+		\caption{Comparison between the different Tabu length for tsp60 and rnd80 instances.}
+		\label{fig:ts-calibration-rnd80}
+	\end{figure}
 
+	
+	\begin{figure}[p]
+		\centering
+		\includegraphics[width=\linewidth]{img/TS-calibration-fb80}
+		%\caption{}
+		%\label{fig:ts-calibration-fb80}
+	%\end{figure}
+	
+	\vspace{2cm}
+	
+	%\begin{figure}
+		%\centering
+		\includegraphics[width=\linewidth]{img/TS-calibration-rnd100}
+		\caption{Comparison between the different Tabu length for fb80 and rnd100 instances.}
+		\label{fig:ts-calibration-rnd100}
+	\end{figure}
+	
+%	\begin{figure}[bh]
+%		\centering
+%		\includegraphics[width=\linewidth]{img/TS-calibration-rnd100_2}
+%		\caption{Comparison between the different Tabu settings for rnd100 instance.}
+%		\label{fig:ts-calibration-rnd1002}
+%	\end{figure}
 
-\subsection{Comparisons of results}
+\newpage
 
-	The time of Local search is not comparable to the Exact Method.
+	\subsubsection{Tests}
+		I tested the Tabu Search implementation with three different strategy.
+		
+		\paragraph{Strategy 1} The Tabu Search is set as previously explained. The CPU time set is 30 seconds. We can see that in the case of small instance (60 nodes) the tabu with 100 of length found a better solution than the tabu with length of 180. Interesting also in the \verb|rnd100_2| instance with length of 100 we get a better solution. If we look at the optimums results \ref{tab:ExactMethodResults} we see that this better solutions are de facto the optimums solutions.
+		
+		\paragraph{Strategy 2} In this strategy I try to do diversification, I start four Tabu search with three different initial random solution, the total time is 30 seconds, hence 10 seconds for each tabu search executed. From the result we can see that this strategy in some cases can improve the result found in the previously strategy, so in general is better to call multiple Tabu Search instead of one in the same amount of time.
+		
+		\paragraph{Strategy 3} In the third strategy instead I only increase the number of CPU time from 30 to 60 second in order to see if Tabu search improve result that are not optimum. In table \ref{tab:ts-results} we can see that this is not the case, for all the instances increasing  time of 30 seconds didn't improve the best value found with \textbf{Strategy 1}.
+		
+		\paragraph*{} From the table \ref{tab:ts-results} we can see that the \textbf{Strategy 2} is the best, in the table \ref{tab:ts-result-q} we see that the Tabu Search found the optimum almost in all instances. From these results I think that the best ways to increase the probability to find the optimum are:
+		\begin{itemize}
+			\item execute more than one Tabu Search with different random initial solutions;
+			\item execute Tabu Search with different tabu length.
+		\end{itemize}
+		
+		\vspace{1cm}
+		
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{l r r r}
+				\toprule
+				\textbf{Instance \textbackslash~Length} & \textbf{100}    & \textbf{180}    & \textbf{240}    \\
+				\midrule
+				\verb|tsp12|                              & 66.40   & 66.40   & 66.40   \\
+				\verb|tsp60|                              & 629.80  & 631.40  & 630.80  \\
+				\verb|rnd60|                              & 311.97 & 312.09 & 312.09 \\
+				\verb|fb60|                               & 247.95 & 247.95 & 247.95 \\
+				\verb|rnd80|                              & 348.11 & 348.23 & 348.11 \\
+				\verb|fb80|                               & 222.72 & 222.70  & 222.70  \\
+				\verb|rnd100|                             & 376.20  & 370.09 & 370.09 \\
+				\verb|rnd100_2|                           & 457.54 & 459.30  & 460.24 \\
+				\verb|fb100|                              & 288.14 & 288.14 & 279.74 \\
+				\bottomrule
+			\end{tabular}
+			\caption{Tabu Search BI with AC results with three different type of tabu length}
+			\label{tab:ts-result}
+		\end{table}
+	
+	\begin{table}[]
+		\centering
+		\begin{tabular}{lrrr}
+			\toprule
+		\textbf{Instance} & \textbf{Strategy 1} & \textbf{Strategy 2} & \textbf{Strategy 3} \\
+			\toprule
+		\verb|tsp12|     & 66.40               & 66.40     & 66.40     \\
+		\verb|tsp60|     & 631.40              & 630.8     & 631.40      \\
+		\verb|rnd60|     & 312.09              & 312.09     & 312.09    \\
+		\verb|fb60|      & 247.95              & 240.47     & 247.95    \\
+		\verb|rnd80|     & 348.23              & 348.11     & 348.23    \\
+		\verb|fb80|      & 222.70              & 222.70     & 222.70    \\
+		\verb|rnd100|    & 370.09              & 370.09     & 370.09   \\
+		\verb|rnd100_2|  & 459.30              & 459.30    & 459.30     \\
+		\verb|fb100|     & 288.14              & 278.56     & 288.14    \\
+			\bottomrule      
+		\end{tabular}
+		\caption{Results of Tabu Search BI AC with the three different strategies}
+		\label{tab:ts-results}
+	\end{table}
+
+	\begin{table}[]
+		\centering
+		\begin{tabular}{lrr}
+			\toprule
+			\textbf{Instance} & \textbf{Strategy 2}& \textbf{Quality (\%)}\\
+			\toprule
+			\verb|tsp12|           & 66.40      & 100	  \\
+			\verb|tsp60|           & 630.8     & 99.8    \\
+			\verb|rnd60|           & 312.09     & 99.9    \\
+			\verb|fb60|            & 240.47     & 100     \\
+			\verb|rnd80|           & 348.11      & 100     \\
+			\verb|fb80|            & 222.70      & 98.5    \\
+			\verb|rnd100|          & 370.09      & 100     \\
+			\verb|rnd100_2|        & 459.30      & 99.6    \\
+			\verb|fb100|           & 278.56      & 99.2        \\
+			\bottomrule      
+		\end{tabular}
+		\caption{Quality of the result of the best strategy for Tabu Search}
+		\label{tab:ts-result-q}
+	\end{table}
+		
+		
