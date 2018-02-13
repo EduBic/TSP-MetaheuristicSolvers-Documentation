@@ -1,9 +1,9 @@
 \section{Real Domain tests}
 \label{sec:realDomainTests}
-	In order to have a better idea of the quality of the methods previously show I tested them with real instance. These instances are taken from the gerber files avaible from the following online archive:
+	In order to have a better idea of the quality of the methods previously shown I tested them with real instance. These instances are taken from the gerber files avaible from the following online archive:
 	\begin{itemize}
 		\item \href{https://www.maximintegrated.com/en/design/tools/cad-layout/gerber/}{https://www.maximintegrated.com/en/design/tools/cad-layout/gerber/};
-		\item \href{https://www.microchip.com/doclisting/TechDoc.aspx?type=Gerber}{https://www.microchip.com/doclisting/TechDoc.aspx?type=Gerber} ;
+		\item \href{https://www.microchip.com/doclisting/TechDoc.aspx?type=Gerber}{https://www.microchip.com/doclisting/TechDoc.aspx?type=Gerber};
 	\end{itemize}
 
 	I explored a dozens of project and select some drill gerber files, from these I made\footnote{This could be done thank to the parser developed by my colleagues Sebastiano Valle and Mirko Bez.} the following \verb|.dat|:
@@ -15,7 +15,7 @@
 	\end{itemize}
 	Figure~\ref{fig:SC_545} shows a representation of one of them. The other could be seen from the pdf inside the \verb|RealInstances| folder attached to this report.
 
-	\begin{figure}
+	\begin{figure} [h]
 		\centering
 		\includegraphics[width=\textwidth]{img/SC_545}
 		\caption{The representation of the SC\_545 real instance.}
@@ -25,11 +25,92 @@
 	
 	
 	\subsection{Results exact method}
-		The instances are too huge and the power of computation is too low in order to test the exact method implemented with CPLEX in an amount of time for this project purpose. Neither with a timeout the CPLEX API can give me a intermediate solution in a reasonable amount of time.
+		The instances are too huge and the power of computation is too low in order to test the exact method implemented with CPLEX in an amount of time for this project purpose. Neither with a time-out the CPLEX API can give me a intermediate solution in a reasonable amount of time.
 		
 	\newpage
 	
 	\subsection{Results Local Search}
+		I run the local search with the \textbf{strategy} explained in the previous section \ref{subsec:results-ls}.
+		
+		
+	
+	
+	\newpage
+	
+	\subsection{Results Tabu Search}
+	
+		\subsubsection{Calibration}
+			With these new instance the previous calibration is no longer valid. I start from that configuration and I increase the Tabu length.
+			
+			I made the calibration on \verb|SC_545| instance.
+			First I take 8 random initial solution. Then I initialize 4 type of Tabu Search:
+			\begin{itemize}
+				\item Best Improvement;
+				\item Best Improvement with Aspiration Criteria;
+				\item First Improvement;
+				\item First Improvement with Aspiration Criteria.
+			\end{itemize}
+			For each type of tabu search I set five different tabu length: 100, 180, 240, 300 and 480. Finally I run each Tabu Search with a maximum time of 30 seconds.  Overall I have $4 \cdot 5 \cdot 8 = 160 $ executions. 
+			
+			The results are shown in the figure \ref{fig:ri-calibration-sc} and \ref{fig:ri-calibration-sc-avg}.
+			
+			\begin{figure} [hb]
+				\centering
+				\includegraphics[width=\linewidth]{img/RI-calibration-SC}
+				\caption{Calibration Real Instances - best value found.}
+				\label{fig:ri-calibration-sc}
+			\end{figure}
+
+\newpage	
+	
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=\linewidth]{img/RI-calibration-SC-avg}
+			\caption{Calibration Real Instances - Average value}
+			\label{fig:ri-calibration-sc-avg}
+		\end{figure}
+		
+			From the charts we can observe that there is some particular differences between the types of Tabu Search. 
+			Furthermore we can observe that increasing the tabu length decrease the best value found and also the average of value found. This is suspected, in fact, with tabu length equal to 480, we obtain these because with a tabu list too long the program have a performance bottleneck in the check if a move is a tabu. Hence I start another calibration, only for TS BI AC (choose arbitrarily) with a tabu length equal to 480 and with a maximum time of 300 seconds (5 minutes).
+			
+			The figure \ref{fig:ri-calibration-tabulengthintime} show with evidence that with more time a larger tabu length is better. If we run a tabu search with tabu length equal to 180 and with a maximum time of 300 seconds we obtain a little improvement but not as the improvement for 480 tabu length case.
+			
+			\paragraph*{Optimize the code} In order to improve the check if a move is a tabu I substitute the tabu list with two data structures. First I use a \verb|std::list| in order to keep the order of moves inserted into the tabu list. With this data structure I can remove the first element and push back at constant time.
+			Second I use a \verb|std::set| for check if a move is a tabu in constant time. I use the concatenation of integer \verb|from| and \verb|to| as key.
+			
+			\textbf{N.B.} This optimization could brings better result in all the previously test. For limit of time I use the optimization only from now on.
+			
+			\paragraph*{} With the implementation I execute again some test with TS BI AC with tabu length 180 and 480. The result is that now with 30 seconds I can achieve a better result with tabu length of 480, also the tabu length of 180 have a better solution. In figure ~\ref{fig:ri-calibration-optimize} are shown the comparison between before and after optimization. 
+			
+			
+\newpage		
+	
+			\begin{figure}
+				\centering
+				\includegraphics[width=\linewidth]{img/RI-calibration-TabuLengthInTime}
+				\caption{Comparison results of TS BI AC with different tabu length and max time.}
+				\label{fig:ri-calibration-tabulengthintime}
+			\end{figure}
+		
+			\begin{figure}
+				\centering
+				\includegraphics[width=\linewidth]{img/RI-calibration-optimize}
+				\caption{Result of TS BI AC in 30 seconds, length of 480, without and with optimization of tabu list.}
+				\label{fig:ri-calibration-optimize}
+			\end{figure}
+		
+		
+			
+			
+		
+			
+			
+		
+			
+		
+			
+			
+			
 	
 	
 	

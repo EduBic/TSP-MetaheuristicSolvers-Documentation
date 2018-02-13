@@ -37,11 +37,14 @@
 	
 \newpage
 \subsection{Results Local Search}
+\label{subsec:results-ls}
 	The Local Search is tremendously fast but at a cost of found the optimal solution only in some instance and in average it performs poorly in comparison with other methods. In this test the User time is ignore as it is equal to CPU time, no parallel computation was implemented into meta heuristics algorithms.
 
 	It's interesting to note the average result of Local Search. I run the LS Best Improvement (BI) and LS First Improvement (FI) with 8 random initial solution for each instance. The average results show that FI is almost always the better choice at a cost of a bit more time, that is the time needed to explore more solutions.
 	
 	The \textbf{best strategy} for use Local Search is to start from a lot of different initial solution, in the table~\ref{tab:LS-BestStrategyResult} I summarized the results of this strategy, every local search is started with eight different random solution and the \textbf{best value} found is selected. The \textbf{CPU time} corresponds to the sum of the time of all tabu searches ran for each instance.
+	
+	An interesting fact that I observed is illustrated in the figure~\ref{fig:ls-convergence}, where it's shown that with the \verb|fb| instances we have a faster convergence than in the others.
 	
 	\vspace{2cm}
 	
@@ -51,9 +54,25 @@
 		\caption{Local Search time for each instance for each feature (BI or FI)}
 		\label{fig:ls-time}
 	\end{figure}
+
+\newpage
 	
+	\begin{figure}[H]
+		\centering
+		
+		\includegraphics[width=\linewidth]{img/LS-convergence}
+		
+		\vspace{1cm}
+		
+		\includegraphics[width=\linewidth]{img/LS-convergence60}
+		
+		\caption{The faster convergence of fb instances respect to the others.}
+		\label{fig:ls-convergence}
+	\end{figure}
 	
-	\begin{table}
+\newpage
+	
+	\begin{table}[H]
 		
 		\begin{tabular}{llrrr}
 			\toprule
@@ -90,7 +109,7 @@
 		\caption{\label{tab:AvgResultLS}Average results of all Local Search BI and FI executed}
 	\end{table}
 	
-	\begin{table}
+	\begin{table}[H]
 		\centering
 		\begin{tabular}{llrrr}
 			\toprule
@@ -207,11 +226,11 @@
 	\subsubsection{Tests}
 		I tested the Tabu Search implementation with three different strategy.
 		
-		\paragraph{Strategy 1} The Tabu Search is set as previously explained. The CPU time set is 30 seconds. We can see that in the case of small instance (60 nodes) the tabu with 100 of length found a better solution than the tabu with length of 180. Interesting also in the \verb|rnd100_2| instance with length of 100 we get a better solution. If we look at the optimums results \ref{tab:ExactMethodResults} we see that this better solutions are de facto the optimums solutions.
+		\paragraph{Strategy 1} The Tabu Search is set as explained in the calibration phase~\ref{subsec:calibration}. The CPU time set is 30 seconds. We can see that in the case of small instance (60 nodes) the tabu with 100 of length found a better solution than the tabu with length of 180. Interesting also in the \verb|rnd100_2| instance with length of 100 we get a better solution. If we look at the optimal results \ref{tab:ExactMethodResults} we see that these better solutions are de facto the optimal solutions.
 		
-		\paragraph{Strategy 2} In this strategy I try to do diversification, I start four Tabu search with three different initial random solution, the total time is 30 seconds, hence 10 seconds for each tabu search executed. From the result we can see that this strategy in some cases can improve the result found in the previously strategy, so in general is better to call multiple Tabu Search instead of one in the same amount of time.
+		\paragraph{Strategy 2} In this strategy I try to do diversification, I start 4 Tabu search with 3 different initial random solutions, the total time is 30 seconds, hence 10 seconds for each tabu search executed. From the result we can see that this strategy in some cases can improve the result found in the previously strategy. Accordingly to that is better to call multiple Tabu Search with different initial solution instead of one, in the same amount of time.
 		
-		\paragraph{Strategy 3} In the third strategy instead I only increase the number of CPU time from 30 to 60 second in order to see if Tabu search improve result that are not optimum. In table \ref{tab:ts-results} we can see that this is not the case, for all the instances increasing  time of 30 seconds didn't improve the best value found with \textbf{Strategy 1}.
+		\paragraph{Strategy 3} In the third strategy instead I only increase the number of CPU time from 30 to 60 second in order to see if Tabu search improve results that are not optimal. In table~\ref{tab:ts-results} we can see that this is not the case, for all the instances increasing  time of 30 seconds did not improve the best value found with \textbf{Strategy 1}.
 		
 		\paragraph*{} From the table \ref{tab:ts-results} we can see that the \textbf{Strategy 2} is the best, in the table \ref{tab:ts-result-q} we see that the Tabu Search found the optimum almost in all instances. From these results I think that the best ways to increase the probability to find the optimum are:
 		\begin{itemize}
