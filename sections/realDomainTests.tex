@@ -27,12 +27,30 @@
 	\subsection{Results exact method}
 		The instances are too huge and the power of computation is too low in order to test the exact method implemented with CPLEX in an amount of time for this project purpose. Neither with a time-out the CPLEX API can give me a intermediate solution in a reasonable amount of time.
 		
-	\newpage
+	%\newpage
 	
 	\subsection{Results Local Search}
-		I run the local search with the \textbf{strategy} explained in the previous section \ref{subsec:results-ls}.
+		I run the local search with the \textbf{strategy} explained in the previous section \ref{subsec:results-ls}. As observed in the tests before the First Improvement tend to converge less respect to Best Improvement but this in the case of \verb|SC_545| and \verb|DS_1120| brings better solution but not for \verb|MAX_682| where it takes more time and get a worse solution, same for the average value. Again there are not empirical proves in order to say if First Improvement is better than Best Improvement or vice versa.
 		
-		
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{llrrr}
+				\toprule
+				\textbf{Instance} & \textbf{Feature} & \textbf{Avg Value} & \textbf{Best Value} & \textbf{Tot Time (s)} \\
+				\toprule
+				\verb|SC_545|  & Best Improv. & 16809.8   & 16440            & 3.59397    \\
+				& First Improv. & 16504.8   & 16231            & 5.61317    \\
+				\midrule
+				\verb|MAX_682| & Best Improv.  & 5350680   & 5187620          & 6.91607    \\
+				& First Improv. & 5356200   & 5272060          & 11.5556    \\
+				\midrule
+				\verb|DS_1120| & Best Improv.  & 17051200   & 16969100         & 39.9405    \\
+				& First Improv. & 16921800    & 16742900         & 71.0088   \\
+				\bottomrule
+			\end{tabular}
+		\caption{Local Search result on real instances.}
+		\label{fig:ri-results-ls}
+		\end{table}
 	
 	
 	\newpage
