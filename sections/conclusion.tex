@@ -1,10 +1,18 @@
 \section{Conclusion}
 
-	\paragraph{Use Meta Heuristics}
-	Domain context:
-		if it's needed a quickly response (think about a user using a CAD/CAM);
-		if the cycle of update on the PCB files is fast, it's better to use a Meta Heuristics method.
-		If the company don't produce huge amount of a single board.
+	From the results contains in this report I could say:
+	
+	\paragraph{} The \textbf{Exact Method} (EM) for instance less or equal to 100 nodes remain the best choice. We get the optimal solution guaranteed in a reasonable amount of time. Anyway it's interesting to note that Exact Method with emulated real instances (\verb|fb| instances) it takes more time to compute the solution. Finally in the real instances tested the use of this method require a large investment of resources (hardware, people and time).
+	
+	\paragraph{} The \textbf{Local Search} (LS) is extremely fast and its best use cases are in the real-time contexts. Also for small instances of nodes the LS isn't able to reach the optimum. Instead the \textbf{Tabu Search} (TS) is a good trade-off, for small instances it found the optimal solution and also in instance with about 500 nodes it performs well, in my opinion time limits parameter is a nice feature. TS limitation starts when we use it on real instances. Here the calibration require more effort, code optimizations are needed and a higher maximum time need to be set. Both LS and TS could use the parallel computation in order to reduce the times.
+	
+	\paragraph{Domain considerations} About the possible domains I think that EM could be used only if the build of the board are huge and the production of the same board last for month or year. In this case an optimal solution guarantees a big saving. Otherwise in the context where the production of boards are limited in time and in quantity the EM is not the best choice, in my opinion here a Tabu Search is the best choice.
+	
+	Another example where meta heuristics methods are a better choice is for test board, still in developing phase. In this case the production is limited to some prototype and also a Local Search is sufficient. 
+	
+	Another important factor is that for the use EM it is needed an expensive license for CPLEX. It is a remarkable disadvantage, mostly for small companies.
+	
+	\paragraph{} Finally I want to do a last consideration a bit out of the assignment, I want to thank my colleagues that gives useful tools and advices. I believe that the collaboration is another essential "feature" in order to tackle these problems.
+
 		
-	\paragraph{Use Exact Method}
-		Instead if the number of boards produced s huge and the production continue for long period in that case is better to invest time and resources in order to get the optimal solution with an exact method.
+	

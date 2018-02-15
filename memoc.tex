@@ -4,7 +4,7 @@
 \usepackage[english]{babel}
 
 \usepackage{booktabs}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{graphicx}
 \usepackage{color, colortbl}
 \usepackage{framed}
@@ -24,9 +24,12 @@
              sections/tests,%
              sections/comparison,%
              sections/realDomainTests,%
+             sections/realDomainComparison,%
              sections/conclusion,%
              appendices/instructions
             }
+        
+
 
 \begin{document}
 
@@ -36,6 +39,10 @@
 	In this report is summarized the tests and the results obtained from the development of two programs. These programs solve a Travelling Sales Problem with, respectively, an exact method (using CPLEX library) and Meta Heuristic methods. The programs were a project assignment of the course Methods and Models for Combinatorial Optimization.
 \end{abstract}
 
+\newpage
+
+\tableofcontents
+
 \include{sections/intro}
 \include{sections/instances}
 \include{sections/firstAssignment}
@@ -43,6 +50,7 @@
 \include{sections/tests}
 \include{sections/comparison}
 \include{sections/realDomainTests}
+\include{sections/realDomainComparison}
 \include{sections/conclusion}
 \include{appendices/instructions}
 

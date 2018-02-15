@@ -1,0 +1,27 @@
+
+\subsection{Comparison of results}
+	
+	From the table~\ref{tab:ri-comparison-results} we can see that for \verb|SC_545| and \verb|MAX_682| the Tabu Search is the best choice but it needs 8 minutes of computation versus only a few seconds of Local Search. In the \verb|DS_1120| instance instead Tabu Search performs poorly, this happens because the 60 seconds for each run it's not a sufficient time to get a local minimum. I think this is due to the fact that with 1120 nodes the evaluation of neighbours needs much more time than with others instances.
+
+	\begin{table}[hb]
+		\centering
+		\begin{tabular}{llrrrr}
+			\toprule
+			\textbf{Instance} & \textbf{Solver} & \textbf{Avg Value} & \textbf{Best Value} & \textbf{Avg T (s)} & \textbf{Tot T (s)} \\
+			\toprule
+			\verb|SC_545|           & TS BI AC        & 16250.2            & 15991               & 60.01                 & 480.06                \\
+			& LS BI           & 16809.8            & 16440               & 0.45                  & 3.59                  \\
+			& LS FI           & 16504.8            & 16231               & 0.70                  & 5.61                  \\
+			\midrule
+			\verb|MAX_682|          & TS BI AC        & 5276730.0          & 5115970             & 60.02                 & 480.12                \\
+			& LS BI           & 5350680.0          & 5187620             & 6.92                  & 0.86                  \\
+			& LS FI           & 5356200.0          & 5272060             & 11.56                 & 1.44                  \\
+			\midrule
+			\verb|DS_1120|          & TS BI AC        & 35080600.0         & 33428000            & 60.04                 & 480.36                \\
+			& LS BI           & 17051200.0         & 16969100            & 39.94                 & 4.99                  \\
+			& LS FI           & 16921800.0         & 16742900            & 71.01                 & 8.88    \\
+			\bottomrule             
+		\end{tabular}
+		\caption{Comparison of results between Local Search and Tabu Search with real instances (T = Time).}
+		\label{tab:ri-comparison-results}
+	\end{table}
