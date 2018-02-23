@@ -4,12 +4,24 @@
 \usepackage[english]{babel}
 
 \usepackage{booktabs}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
 \usepackage{graphicx}
 \usepackage{color, colortbl}
 \usepackage{framed}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{float}
+
+% Code
+\usepackage{listings}
+\lstset{language=C++,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{green}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#},
+	numbers=left,
+	stepnumber=1,
+}
 
 \definecolor{LightGray}{rgb}{0.88,0.88,0.88}
 
@@ -26,7 +38,8 @@
              sections/realDomainTests,%
              sections/realDomainComparison,%
              sections/conclusion,%
-             appendices/instructions
+             appendices/instructions,%
+             appendices/optimization
             }
         
 
@@ -53,5 +66,6 @@
 \include{sections/realDomainComparison}
 \include{sections/conclusion}
 \include{appendices/instructions}
+\include{appendices/optimization}
 
 \end{document}

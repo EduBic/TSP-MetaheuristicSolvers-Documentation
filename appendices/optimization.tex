@@ -1,37 +1,3 @@
-\documentclass[]{article}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-
-\usepackage{booktabs}
-\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
-\usepackage{graphicx}
-\usepackage{color, colortbl}
-\usepackage{xcolor}
-\usepackage{framed}
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{float}
-
-% Code
-\usepackage{listings}
-\lstset{language=C++,
-	basicstyle=\ttfamily,
-	keywordstyle=\color{blue}\ttfamily,
-	stringstyle=\color{red}\ttfamily,
-	commentstyle=\color{green}\ttfamily,
-	morecomment=[l][\color{magenta}]{\#},
-	 numbers=left,
-	stepnumber=1,
-}
-
-%opening
-\title{}
-\author{Eduard Bicego}
-        
-
-\begin{document}
-
-\maketitle
 
 \section{How to not optimize the Tabu List}
 	In this section I try to understand how different implementations of Tabu list for the Tabu Search method can impact in the quality of the best solution found in a certain amount of time. I also compared the results with the results of the Local Search method.
@@ -169,8 +135,3 @@ The following list show the settings for Tabu Search and Local Search:
 		\item The average of iterations decrease less using a set + list than a list. In case of the need of a large tabu list, this could be an alternative. In the literature often this is not the case, others container or tricks could performs much better\footnote{hash set is a valid variants of set. Sorted vector often are use as substitute of an associative container.}.
 	\end{itemize}
 	
-	
-
-	
-
-\end{document}
